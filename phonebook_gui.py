@@ -23,7 +23,7 @@ layout2 = [
     [sg.Text('')],
     [sg.Text('First name: ', size = (10,1)), sg.Input('', key = '_FNAME_')],
     [sg.Text('Last name: ', size = (10,1)), sg.Input('', key = '_LNAME_')],
-    [sg.Text('Telephone: ', size = (10,1)), sg.Input('', key = '_TELEPHONE_')],
+    [sg.Text('Telephone: ', size = (10,1)), sg.Input('example: +XXX XX XXX XXX(X)',  key = '_TELEPHONE_', do_not_clear=False)],
     [sg.Text('E-mail: ', size = (10,1)), sg.Input('', key = '_EMAIL_')],
     [sg.Text('')],
     [sg.Text('', size = (39,1)), sg.Button('Save', size=(10, 1))]
@@ -38,7 +38,6 @@ window = sg.Window(title = 'Phonebook', layout=layout)
 
 while True:
     event, values = window.read()
-
     if event == None:
         break
     if event == 'Save':
