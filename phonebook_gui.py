@@ -9,11 +9,13 @@
 # • Pri pokretanju aplikacije učitavaju se prethodno snimljeni kontakti.
 
 import PySimpleGUI as sg
+from contacts.Validator import Validator
+from contacts.Contact import Contact
 
 sg.theme('DarkBlue')
 
 layout1 = [
-    [sg.Listbox('', size = (50,20))]
+    [sg.Listbox(Contact.get_all_contacts().values(), size = (50,20), key = '_CONTACTS_')]
 ]
 
 layout2 = [
@@ -39,5 +41,18 @@ while True:
 
     if event == None:
         break
+    if event == 'Save':
+        try:
+            Validator.check_email(values['_EMAIL_'])
+            Validator.check_telephone(values['_TELEPHONE_'])
+            new_id = Contact.get_id()
+            new_contact = Contact(new_id, values['_FNAME_'], values['_LNAME_'], values['_TELEPHONE_'], values['_EMAIL_'])
+            Contact.save_contact(new_contact)
+            sg.popup('Contact saved')
+            contacts = Contact.get_all_contacts()
+            contacts = contacts.values()
+            window['_CONTACTS_'].Update(contacts)
+        except Exception as ex:
+            sg.popup_error(str(ex), title = 'Error')
 
 window.close()
