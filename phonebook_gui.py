@@ -43,8 +43,8 @@ while True:
         break
     if event == 'Save':
         try:
-            Validator.check_email(values['_EMAIL_'])
             Validator.check_telephone(values['_TELEPHONE_'])
+            Validator.check_email(values['_EMAIL_'])
             new_id = Contact.get_id()
             new_contact = Contact(new_id, values['_FNAME_'], values['_LNAME_'], values['_TELEPHONE_'], values['_EMAIL_'])
             Contact.save_contact(new_contact)
