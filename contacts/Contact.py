@@ -13,10 +13,7 @@ class Contact:
         self.email = email
 
     def __str__(self) -> str:
-        return f"[{self.id}] {self.first_name} {self.last_name} - {self.telephone} - {self.email}"
-
-    def show_details(self):
-        return f"[{self.id}] {self.first_name} {self.last_name} - {self.telephone} - {self.email}"
+        return f"[{self.id}] {self.first_name} {self.last_name} ({self.telephone})/({self.email})"
 
     @staticmethod
     def get_path (id):
